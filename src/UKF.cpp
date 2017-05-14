@@ -128,7 +128,7 @@ void UKF::predictRadarMeasurement() {
   for (int i = 0; i < 2 * m_nAug + 1; i++) {
     Eigen::VectorXd ev = m_XSigmaPred.col(i);
     double rho = sqrt(ev[0] * ev[0] + ev[1] * ev[1]);
-    double phi = atan2(ev[1], ev[0]); // TODO handle 0 denom
+    double phi = atan2(ev[1], fabs(ev[0]) < 1e-5 ? 1e-5 : ev[0]);
     double rhoDot = ev[2] * (ev[0] * cos(ev[3]) + ev[1] * sin(ev[3])) / std::max(1e-5, rho);
     normalizeAngle(phi);
     m_ZSigma(0, i) = rho;
