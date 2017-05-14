@@ -24,8 +24,8 @@ UKF::UKF():
     m_P(i, i) = 1;
 
   // Initialize process noise sigma
-  m_stdA = 0.5;
-  m_stdYawdd = 0.01;
+  m_stdA = 1;
+  m_stdYawdd = 2;
 
   m_Q.fill(0);
   m_Q << (m_stdA * m_stdA) , 0,
