@@ -8,7 +8,7 @@ UKF::UKF():
   m_firstUpdate(true),
   m_lastTimestamp(0), m_P(5, 5), m_Q(2, 2),
   m_RRadar(3, 3), m_RLidar(2, 2),
-  m_nisLidar(0), m_nisRadar(0) {
+  m_nis(0) {
 
   m_x.fill(0);
 
@@ -187,6 +187,7 @@ void UKF::calculateGain() {
 void UKF::updateState(const Eigen::VectorXd& z) {
   m_x = m_xPred + m_K * (z - m_zPred);
   m_P = m_PPred - m_K * m_S * m_K.transpose();
+  m_nis = (z - m_zPred).transpose() * m_S.inverse() * (z - m_zPred);
 }
 
 void UKF::processLidarUpdate(const LidarUpdate& update) {

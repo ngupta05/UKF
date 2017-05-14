@@ -15,8 +15,7 @@ class UKF {
   Eigen::MatrixXd m_RLidar;
   int m_stdA;
   int m_stdYawdd;
-  float m_nisLidar;
-  float m_nisRadar;
+  float m_nis;
 
   // Temp variables for calculations
   const int m_nx = 5;
@@ -39,8 +38,7 @@ class UKF {
   void processLidarUpdate(const LidarUpdate& update);
   void processRadarUpdate(const RadarUpdate& update);
   Eigen::VectorXd getEstimate() const { return m_x; }
-  float getNISLidar() const { return m_nisLidar; }
-  float getNISRadar() const { return m_nisRadar; }
+  float getNIS() const { return m_nis; }
 
   private:
   template<typename T>

@@ -88,11 +88,10 @@ int main(int argc, char** argv) {
     // print sensor type and NIS
     if (type.compare("L") == 0) {
       outputFile << "lidar" << "\t";
-      outputFile << ukf.getNISLidar() << "\t";
     } else {
       outputFile << "radar" << "\t";
-      outputFile << ukf.getNISRadar() << "\t";
     }
+    outputFile << ukf.getNIS() << "\t";
     // print measured px, py
     outputFile << px << "\t" << py << "\t";
     // print ground truth
