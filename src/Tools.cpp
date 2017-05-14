@@ -15,6 +15,7 @@ Eigen::VectorXd Tools::calculateRMSE(std::vector<Eigen::VectorXd> estimates,
     return Eigen::VectorXd();
 
   Eigen::VectorXd rmse(stateSize);
+  rmse.fill(0);
   unsigned int size = estimates.size();
   for (unsigned int i = 0; i < size; i++) {
     Eigen::VectorXd diff = estimates[i] - truth[i];
@@ -22,8 +23,7 @@ Eigen::VectorXd Tools::calculateRMSE(std::vector<Eigen::VectorXd> estimates,
     rmse += diff;
   }
 
-  for (unsigned int i = 0; i < stateSize; i++)
-   rmse(i) /= stateSize; 
+  rmse /= size;
 
   rmse = rmse.array().sqrt();
   return rmse;

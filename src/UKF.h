@@ -23,10 +23,12 @@ class UKF {
   const float m_lambda = 3 - m_nAug;
   const int m_nzRadar = 3;
   const int m_nzLidar = 2;
-  Eigen::VectorXd m_weights;
+  Eigen::VectorXd m_xAug;
+  Eigen::MatrixXd m_PAug;
   Eigen::MatrixXd m_XSigmaAug, m_XSigmaPred;
   Eigen::VectorXd m_xPred;
   Eigen::MatrixXd m_PPred;
+  Eigen::VectorXd m_weights;
   Eigen::MatrixXd m_ZSigma;
   Eigen::MatrixXd m_zPred;
   Eigen::MatrixXd m_S;
@@ -55,4 +57,5 @@ class UKF {
   void predictLidarMeasurement();
   void calculateGain();
   void updateState(const Eigen::VectorXd& z);
+  void calculateNIS(const Eigen::VectorXd& z);
 };
